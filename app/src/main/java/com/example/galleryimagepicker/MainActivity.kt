@@ -4,13 +4,18 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+
 
 @RequiresApi(Build.VERSION_CODES.M)
 class MainActivity : AppCompatActivity() {
@@ -29,6 +34,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         requestPermission()
+
+        val be = BottomSheetBehavior.from(findViewById(R.id.bottomSheet))
+        be.state = BottomSheetBehavior.STATE_HIDDEN
+
+        findViewById<Button>(R.id.button1).setOnClickListener {
+            be.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+        findViewById<Button>(R.id.button2).setOnClickListener {
+            be.state = BottomSheetBehavior.STATE_HIDDEN
+        }
     }
 
     private fun requestPermission() {
